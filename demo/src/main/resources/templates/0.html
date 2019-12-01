@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>第一个HTML页面</title>
+    <scripte type="text/javascript" src="js/jquery-1.9"
+</head>
+<body>
+<h1>Hello My Spring Boot!!!</h1>
+<p th:text="${hello}"></p>
+<p th:text="${time}"></p>
+<b>this is a example of Spring Boot</b>
+<br>
+<br>
+
+<div>
+    <form id = "loginForm" action="login" method="post">
+    <!-- <form id="loginForm"> -->
+        <p>
+            <label>姓名 </label>
+            <input name="name" value="Tom" width="200">
+        </p>
+        <p>
+            <label>密码 </label>
+            <input name="password" type="password" value="123456" >
+        </p>
+        <button onclick="clickLoginButton()">登录</button>
+    </form>
+</div>
+
+<br>
+<br>
+
+<div>
+    <form action="upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="picture">
+        <input type="submit" value="上传">
+    </form>
+</div>
+
+<script>
+function createRequest()
+{
+    try
+    {
+        request = new XMLHttpRequest();
+    }
+    catch(tryMS)
+    {
+        try
+        {
+            request = new ActiveXObject("Msxml2.XMLHTTP");
+        }
+        catch(failed)
+        {
+            request = null;
+        }
+    }
+
+}
+function clickLoginButton()
+{
+    formdata = document.getElementById("loginForm");
+    alert(logindata.name);
+}
+</script>
+<!--
+<br>
+<a href="click_button_0">click me!!!</a>
+-->
+</body>
+</html>
