@@ -4,7 +4,6 @@ import com.example.demo.annotation.Intercept;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -18,7 +17,6 @@ import java.io.PrintWriter;
 /**
  * 进入controller之前可以按照本方法拦截
  */
-@Component
 public class InterceptorConfig implements HandlerInterceptor {
     private Logger logger = LoggerFactory.getLogger(InterceptorConfig.class);
     private static final Logger log = LoggerFactory.getLogger(InterceptorConfig.class);
@@ -34,9 +32,7 @@ public class InterceptorConfig implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-        System.out.println("******** preHandle is invoked ********");
-        String uri = httpServletRequest.getRequestURI();
-        System.out.println("context path: " + httpServletRequest.getContextPath());
+        System.out.println("preHandler is invoked");
         return true;
         /*
         HttpSession session = httpServletRequest.getSession();

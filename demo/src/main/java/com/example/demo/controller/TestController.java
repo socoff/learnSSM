@@ -107,10 +107,10 @@ public class TestController {
     //     return "/1";
     // }
 
-    @RequestMapping("/vue0")
-    public String handleVue01(){
+    @RequestMapping("/testVoid")
+    public String testVoid(){
         System.out.println("默认情况...");
-        return "/vue_0";
+        return "/1";
     }
 
     @RequestMapping("/say/{txt}")
