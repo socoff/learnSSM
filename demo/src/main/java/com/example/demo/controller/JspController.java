@@ -11,7 +11,7 @@ public class JspController {
     public String handleJsp10()
     {
         System.out.println("handleJsp10 is invoked");
-        return "/10";
+        return "/10.jsp";
     }
 
     @RequestMapping("00")

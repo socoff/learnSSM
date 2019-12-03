@@ -1,6 +1,10 @@
 server:
   port: 80
 spring:
+  mvc:
+    static-path-pattern: /**
+  resources:
+    static-locations: classpath:/webapp/WEB-INF/jsp/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${web.upload-path}
   servlet:
     multipart:
       max-file-size: 100MB
@@ -12,7 +16,7 @@ spring:
       url: jdbc:mysql://127.0.0.1:3306/starter?useAffectedRows=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=UTC
       username: root
       password: 111111
-      driver-class-name: com.mysql.jdbc.Driver
+      driver-class-name: com.mysql.cj.jdbc.Driver
       initial-size: 1 #初始化时建立物理连接的个数。初始化发生在显示调用init方法，或者第一次getConnection时
       min-idle: 5 #最小连接池数量
       max-active: 50 #最大连接池数量
