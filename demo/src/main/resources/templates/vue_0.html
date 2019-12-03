@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>vue学习页面</title>
+    <script src="/js/vue.js"></script>
+</head>
+<body>
+    <div id="vue_0">
+        <h1>site: {{site}}</h1>
+        <h1>name: {{name}}</h1>
+        <h1>details: {{details()}}</h1>
+        <div v-if="show">show me???</div>
+    </div>
+
+    <script type="text/javascript">
+        var vvv = new Vue({
+            el: '#vue_0',
+            data: {
+                site: "第一个vue的测试页面",
+                name: "solo",
+                show: false,
+            },
+            methods: {
+                details:  function()
+                {
+                    return this.site + "，over";
+                }
+            }
+        })
+
+        // var json1 = new Vue({
+        //     el: "#app",
+        //     data() {
+        //         return {
+        //             info: null
+        //         }
+        //     },
+        //     mounted() {
+        //         axios
+        //             .post('/Rest1')
+        //             .then(response => (this.info = response))
+        //             .catch(function (error) {
+        //                 consolo.log(error);
+        //             });
+        //     }
+        // })
+    </script>
+
+
+</body>
+</html>
