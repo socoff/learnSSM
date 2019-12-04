@@ -1,8 +1,6 @@
 package com.example.demo.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.JSONPObject;
 import com.example.demo.bean.User;
 import com.example.demo.service.UserService;
 

@@ -18,7 +18,7 @@ import java.io.PrintWriter;
 /**
  * 进入controller之前可以按照本方法拦截
  */
-@Component
+// @Component
 public class InterceptorConfig implements HandlerInterceptor {
     private Logger logger = LoggerFactory.getLogger(InterceptorConfig.class);
     private static final Logger log = LoggerFactory.getLogger(InterceptorConfig.class);
@@ -34,9 +34,9 @@ public class InterceptorConfig implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-        System.out.println("******** preHandle is invoked ********");
-        String uri = httpServletRequest.getRequestURI();
-        System.out.println("context path: " + httpServletRequest.getContextPath());
+        //System.out.println("******** preHandle is invoked ********");
+        //String uri = httpServletRequest.getRequestURI();
+        //System.out.println("context path: " + httpServletRequest.getContextPath());
         return true;
         /*
         HttpSession session = httpServletRequest.getSession();
@@ -62,25 +62,25 @@ public class InterceptorConfig implements HandlerInterceptor {
     }
 
 
-    private boolean handle(Intercept intercept, HttpSession session, HttpServletResponse httpServletResponse) throws Exception {
-        return true;
-    }
+    // private boolean handle(Intercept intercept, HttpSession session, HttpServletResponse httpServletResponse) throws Exception {
+    //     return true;
+    // }
 
-    @Override
-    public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
-        logger.info("--------------处理请求完成后视图渲染之前的处理操作---------------");
-    }
+    // @Override
+    // public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
+    //     logger.info("--------------处理请求完成后视图渲染之前的处理操作---------------");
+    // }
 
-    @Override
-    public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
-        logger.info("---------------视图渲染之后的操作-------------------------0");
-    }
+    // @Override
+    // public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
+    //     logger.info("---------------视图渲染之后的操作-------------------------0");
+    // }
 
-    private void sendErrorMessage(HttpServletResponse response, String message) throws Exception {
+    // private void sendErrorMessage(HttpServletResponse response, String message) throws Exception {
 
-        response.setContentType("application/json;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        out.write(message);
-        out.close();
-    }
+    //     response.setContentType("application/json;charset=UTF-8");
+    //     PrintWriter out = response.getWriter();
+    //     out.write(message);
+    //     out.close();
+    // }
 }

@@ -11,20 +11,43 @@
         <h1>name: {{name}}</h1>
         <h1>details: {{details()}}</h1>
         <div v-if="show">show me???</div>
+        <a v-bind:href="url">我的链接</a><br>
+        <img v-bind:src="imgbk">
     </div>
 
+    <button id="vue_1" @click="handleClick">{{button1}}</button>
+
+
     <script type="text/javascript">
-        var vvv = new Vue({
+        var v0 = new Vue({
             el: '#vue_0',
             data: {
                 site: "第一个vue的测试页面",
                 name: "solo",
                 show: false,
+                url: 'http://baidu.com',
+                imgbk: 'images/bg.jpg'
             },
             methods: {
                 details:  function()
                 {
                     return this.site + "，over";
+                }
+            }
+        });
+
+        var v1 = new Vue({
+            el: '#vue_1',
+            data: {
+                button1: "click me!"
+            },
+            methods: {
+                handleClick: function()
+                {
+                    if(this.button1 != "stop")
+                        this.button1 = "stop";
+                    else
+                        this.button1 = "click me!";
                 }
             }
         })

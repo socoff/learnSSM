@@ -21,25 +21,17 @@ public class BaseInterceptor implements HandlerInterceptor {
     private static final Logger LOGGE = LoggerFactory.getLogger(BaseInterceptor.class);
     private static final String USER_AGENT = "user-agent";
 
-    @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
-        String uri = request.getRequestURI();
+    // @Override
+    // public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
+    //     String uri = request.getRequestURI();
 
-        System.out.println("BaseInterceptor.preHandle is invoked");
-        System.out.println("context path: " + request.getContextPath());
+    //     System.out.println("BaseInterceptor.preHandle is invoked");
+    //     System.out.println("context path: " + request.getContextPath());
 
-        LOGGE.info("UserAgent: {}", request.getHeader(USER_AGENT));
+    //     LOGGE.info("UserAgent: {}", request.getHeader(USER_AGENT));
 
-        // if (uri.startsWith("/admin") && !uri.startsWith("/admin/login") 
-        //         && !uri.startsWith("/admin/css") && !uri.startsWith("/admin/images")
-        //         && !uri.startsWith("/admin/js") && !uri.startsWith("/admin/plugins")
-        //         && !uri.startsWith("/admin/editormd")) {
-        //     response.sendRedirect(request.getContextPath() + "/admin/login");
-        //     return false;
-        // }
-
-        return true;
-    }
+    //     return true;
+    // }
 
     // @Override
     // public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {

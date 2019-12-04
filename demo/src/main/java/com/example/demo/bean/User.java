@@ -14,6 +14,20 @@ public class User {
     private Integer delFlag;
     private Date updateTime;
 
+    public String toString()
+    {
+        return "id: " + id +
+               "\ncode: " + code +
+               "\nname: " + name +
+               "\npassword: " + password +
+               "\ncreateTime: " + createTime +
+               "\norgId: " + orgId +
+               "\nstate: " + state +
+               "\njobType: " + jobType +
+               "\ndelFlag: " + delFlag +
+               "\nupdateTime: " + updateTime;
+    }
+
     /**
      * @return Integer return the id
      */
