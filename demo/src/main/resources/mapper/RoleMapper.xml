@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper:根标签，namespace：命名空间，跟DAO接口对应 
+     文件的名字可以随便取，但namespace一定要指定对应数据操作的接口 -->
+
+<mapper namespace="com.example.demo.dao.RoleDao">
+   <!-- statement，内容：sql语句。id：对应DAO接口的方法名
+      resultType：sql语句查询结果集的封装类bean
+    -->
+
+   <!-- 通过映射关系对应到User类，名称一致属性的可以自动映射，无需指定 -->
+   <resultMap id="roleMap" type="com.example.demo.bean.Role">
+      <id column="id" property="id" />
+      <result column="available" property="available" />
+      <result column="description" property="desc" />
+      <result column="role" property="name" />
+   </resultMap>
+   <select id="getRoleById" resultMap="roleMap">
+      select * from sys_role where id=#{id}
+   </select>
+ 
+   <!-- <select id="getUserById" resultType="com.example.demo.bean.User">
+      select * from core_user where id=#{id}
+   </select> -->
+</mapper>

@@ -14,7 +14,7 @@
 <br>
 
 <div>
-    <form id = "loginForm" action="login" method="post">
+    <form id = "loginForm" action="login" method="put">
     <!-- <form id="loginForm"> -->
         <p>
             <label>姓名 </label>
@@ -24,7 +24,7 @@
             <label>密码 </label>
             <input name="password" type="password" value="123456" >
         </p>
-        <button onclick="clickLoginButton()">登录</button>
+        <p><input type="submit" value="登录"/></p>
     </form>
 </div>
 
@@ -39,30 +39,8 @@
 </div>
 
 <script>
-function createRequest()
-{
-    try
-    {
-        request = new XMLHttpRequest();
-    }
-    catch(tryMS)
-    {
-        try
-        {
-            request = new ActiveXObject("Msxml2.XMLHTTP");
-        }
-        catch(failed)
-        {
-            request = null;
-        }
-    }
 
-}
-function clickLoginButton()
-{
-    formdata = document.getElementById("loginForm");
-    alert(logindata.name);
-}
+
 </script>
 <!--
 <br>

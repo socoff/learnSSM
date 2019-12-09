@@ -18,7 +18,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 //@SpringBootApplication(scanBasePackages = {"com.example.demo.bean", "com.example.demo.interceptor"})
 //@ComponentScan(basePackages = {"com.example.demo.bean", "com.example.demo.controller", "com.example.demo.service", "com.example.demo.interceptor"})
 //@EnableTransactionManagement
-@SpringBootApplication(scanBasePackages = {"com.example.demo.bean", "com.example.demo.controller", "com.example.demo.service", "com.example.demo.interceptor"})
+@SpringBootApplication(scanBasePackages = {"com.example.demo.bean", "com.example.demo.controller", "com.example.demo.service", "com.example.demo.interceptor", "com.example.demo.config"})
 @MapperScan("com.example.demo.dao")
 @EnableSwagger2 // 该死的注解！2.9.2的swagger需要将此注解放在application class上，否则会报错，并出现“Unable to infer base url...”对话框
 public class DemoApplication /*extends SpringBootServletInitializer*/ {

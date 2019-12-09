@@ -11,15 +11,9 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-/**
- * Swagger2 配置
- */
+
 @Configuration
-public class Swagger2 {
-
-    @Value("${swagger.show}")
-    private boolean swaggerShow;
-
+public class MySwagger2 {
 
     @Bean
     public Docket createRestApi() {

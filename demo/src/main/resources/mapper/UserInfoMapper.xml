@@ -4,7 +4,7 @@
 <!-- mapper:根标签，namespace：命名空间，跟DAO接口对应 
      文件的名字可以随便取，但namespace一定要指定对应数据操作的接口 -->
 
-<mapper namespace="com.example.demo.dao.UserDao">
+<mapper namespace="com.example.demo.dao.UserInfoDao">
    <!-- statement，内容：sql语句。id：对应DAO接口的方法名
       resultType：sql语句查询结果集的封装类bean
     -->
@@ -28,7 +28,37 @@
    <select id="getUserByName" resultMap="userMap">
       select * from core_user where name=#{name}
    </select>
- 
+
+   <resultMap id="roleMap" type="com.example.demo.bean.Role">
+      <id column="id" property="id" />
+      <result column="available" property="available" />
+      <result column="description" property="desc" />
+      <result column="role" property="name" />
+   </resultMap>
+   <select id="getRoleById" resultMap="roleMap">
+      select * from sys_role where id=#{id}
+   </select>
+
+   <resultMap id="userInfoMap" type="com.example.demo.bean.UserInfo">
+      <id column="uid" property="uid" />
+      <result column="name" property="name" />
+      <result column="password" property="password" />
+      <result column="salt" property="salt" />
+      <result column="state" property="state" />
+      <result column="username" property="userName" />
+   </resultMap>
+   <select id="getUserInfoByUserName" resultMap="userInfoMap">
+      select * from user_info where username=#{userName}
+   </select>
+   <select id="getUserInfoByUid" resultMap="userInfoMap">
+      select * from user_info where uid=#{uid}
+   </select>
+
+   <!-- <select id="getUserInfoByUserName" resultType="com.example.demo.bean.UserInfo">
+      select * from user_info where username=#{userName}
+   </select> -->
+
+
    <!-- <select id="getUserById" resultType="com.example.demo.bean.User">
       select * from core_user where id=#{id}
    </select> -->

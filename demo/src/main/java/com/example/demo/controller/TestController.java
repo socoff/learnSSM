@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -29,26 +30,27 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
-@RequestMapping("/")
-public class TestController {
+@RequestMapping("/user")
+public class TestController extends BaseController
+{
 
     private String keyBaiduMap = "//api.map.baidu.com/api?v=2.0&ak=0b7ASBceKlUBnIwqVvLOHRqlYtSxyM5I";
 
+    // 缺省跳转，用于处理404错误
+    // @RequestMapping("*")
+    // public String handle404()
+    // {
+    //     return "error404";
+    // }
+
     /**
-     * 本地访问内容地址 ：http://localhost:8080/hello
+     * 本地访问内容地址 ：http://localhost:8080/hello1
      * @param map
      * @return
      */
-    @RequestMapping(value = "/hello1",
-        method = {RequestMethod.POST, RequestMethod.GET})
-    public String helloHtml(HashMap<String, Object> map) {
-        System.out.println("helloHtml is invoked");
-        map.put("hello", "欢迎进入HTML页面");
-        Date date = new Date();
-        map.put("time", date);
-        return "/0.html";
-    }
-    
+
+
+    @RequiresPermissions("userInfo:view")//权限管理;
     @RequestMapping("hi")
     public String hi(Model model)
     {
@@ -60,7 +62,7 @@ public class TestController {
         // return "/0";
     }
 
-    @RequestMapping("login")
+    @RequestMapping("login000")
     public String handleLogin(/*@ModelAttribute */LoginForm loginForm, HashMap<String, Object> map)
     {
         //model.addAttribute("name", loginForm.getName());
@@ -147,11 +149,11 @@ public class TestController {
 
     // 注解为ModelAttribute的方法会在RequestMapping方法之前被执行，
     // 多个ModelAttribute的方法执行顺序未知
-    @ModelAttribute
-    public void whatTheFuck2()
-    {
-        System.out.println("what the fuck #2?"); 
-    }
+    // @ModelAttribute
+    // public void whatTheFuck2()
+    // {
+    //     System.out.println("what the fuck #2?"); 
+    // }
 
     @ModelAttribute
     public void whatTheFuck()
@@ -174,6 +176,7 @@ public class TestController {
         request.setAttribute("name", "文件传输完成");
         return "1";
     }
+
 
     @RequestMapping("/upload2")
     //@ResponseBody

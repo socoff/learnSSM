@@ -1,10 +1,19 @@
 server:
   port: 80
+
+  # servlet:
+  #   session:
+  #     timeout: 10s # 单位：秒
+
 spring:
-  mvc:
-    static-path-pattern: /**
-  resources:
-    static-locations: classpath:/META-INF/resources/,classpath:/META-INF/resources/webjars/,classpath:/static/swagger/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${web.upload-path}
+  # mvc:
+  #   static-path-pattern: /**
+  thymeleaf:
+    cache: false
+    mode: HTML
+
+  # resources:
+  #   static-locations: classpath:/META-INF/resources/,classpath:/META-INF/resources/webjars/,classpath:/static/swagger/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${web.upload-path}
   servlet:
     multipart:
       max-file-size: 100MB
@@ -30,9 +39,8 @@ spring:
       #打开PSCache，并指定每个连接上PSCache的大小。oracle设为true，mysql设为false。分库分表较多推荐设置为false
       pool-prepared-statements: false #是否缓存preparedStatement，也就是PSCache。PSCache对支持游标的数据库性能提升巨大，比如说oracle。在mysql下建议关闭。
       max-pool-prepared-statement-per-connection-size: 20
+      
 mybatis:
   # type-aliases-package: com.example.demo.bean
   mapper-locations: classpath:mapper/*.xml #mapper XML文件的位置
 
-
-  
