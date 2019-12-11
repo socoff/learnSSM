@@ -165,7 +165,7 @@ public class TestController extends BaseController
     @RequestMapping("/upload")
     //@ResponseBody //此注解需关注
     // html提交过来的元素名是picture，而在函数中想使用另外的变量名，这时候就要用到@RequestParam("picture")
-    // 上传文件时，要买注解ResponseBody，要么返回指定视图，否则出错，原因在探索中
+    // 上传文件时，要么注解ResponseBody，要么返回指定视图，否则出错，原因在探索中
     // 可以将@Controller换成@RestController，不过需要注意有没有其他的方法返回了html页面，会导致返回的不是页面而是字符串；
     // 最好的方法就是在你所请求的方法上面加一个@ResponseBody即可
     public String upload1(@RequestParam("picture") MultipartFile imgFile, HttpServletRequest request) throws Exception

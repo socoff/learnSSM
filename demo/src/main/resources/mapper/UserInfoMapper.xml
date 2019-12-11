@@ -9,36 +9,6 @@
       resultType：sql语句查询结果集的封装类bean
     -->
 
-   <!-- 通过映射关系对应到User类，名称一致属性的可以自动映射，无需指定 -->
-   <resultMap id="userMap" type="com.example.demo.bean.User">
-      <id column="id" property="id" />
-      <!-- <result column="code" property="code" />
-      <result column="name" property="name" /> -->
-      <result column="password" property="password" />
-      <result column="create_time" property="createTime" />
-      <result column="org_id" property="orgId" />
-      <result column="state" property="state" />
-      <result column="job_type1" property="jobType" />
-      <result column="del_flag" property="delFlag" />
-      <result column="update_time" property="updateTime" />
-   </resultMap>
-   <select id="getUserById" resultMap="userMap">
-      select * from core_user where id=#{id}
-   </select>
-   <select id="getUserByName" resultMap="userMap">
-      select * from core_user where name=#{name}
-   </select>
-
-   <resultMap id="roleMap" type="com.example.demo.bean.Role">
-      <id column="id" property="id" />
-      <result column="available" property="available" />
-      <result column="description" property="desc" />
-      <result column="role" property="name" />
-   </resultMap>
-   <select id="getRoleById" resultMap="roleMap">
-      select * from sys_role where id=#{id}
-   </select>
-
    <resultMap id="userInfoMap" type="com.example.demo.bean.UserInfo">
       <id column="uid" property="uid" />
       <result column="name" property="name" />
@@ -53,6 +23,10 @@
    <select id="getUserInfoByUid" resultMap="userInfoMap">
       select * from user_info where uid=#{uid}
    </select>
+   <insert id="insertUser" parameterType="com.example.demo.bean.UserInfo">
+      insert into user_info (uid,name,password,salt,state,username)
+      values (#{uid},#{name},#{password},#{salt},#{state},#{userName})
+   </insert>
 
    <!-- <select id="getUserInfoByUserName" resultType="com.example.demo.bean.UserInfo">
       select * from user_info where username=#{userName}

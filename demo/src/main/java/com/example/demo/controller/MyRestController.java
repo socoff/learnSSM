@@ -4,13 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.alibaba.fastjson.JSONObject;
+import com.example.demo.annotation.LogAnnotation;
 import com.example.demo.bean.MyResponse;
 import com.example.demo.bean.User;
 import com.example.demo.bean.UserInfo;
 import com.example.demo.form.LoginForm;
+import com.example.demo.mapper.UserInfoMapper;
+import com.example.demo.service.PasswordService;
 import com.example.demo.service.UserInfoService;
 import com.example.demo.service.UserService;
 
+import org.mybatis.spring.annotation.MapperScan;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -21,18 +27,33 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+// import org.apache.logging.log4j.Logger;
 
 @RestController
 @RequestMapping("/user")
 @Api("用户管理")
 // @Transactional(rollbackFor = BusinessException.class)
 public class MyRestController extends BaseController{
+
+    private static Logger logger = LoggerFactory.getLogger(MyRestController.class.getName());
+
     
     @Autowired
     UserService userService;
 
     @Autowired
     UserInfoService userInfoService;
+
+    @Autowired
+    PasswordService passwordService;
+
+    @Autowired
+    private UserInfoMapper userInfoMapper;
+
 
     @RequestMapping(value = "/getUserName", method = RequestMethod.GET)
     @ApiOperation(value = "根据用户编号获取用户姓名", notes = "test:只有1和2返回正确")
@@ -50,7 +71,7 @@ public class MyRestController extends BaseController{
     @RequestMapping(value = "/getUserInfo1", method = RequestMethod.GET)
     public UserInfo getUserInfoByUid(String uid) throws Exception
     {
-        System.out.println("getUserInfoByUid()...");
+        logger.info("getUserInfoByUid()...");
         UserInfo userInfo = userInfoService.getUserInfoByUid(1);
         System.out.println(userInfo);
         return userInfo;
@@ -88,4 +109,63 @@ public class MyRestController extends BaseController{
         myResponse.setRes("name: " + loginForm.getName() + ", password: " + loginForm.getPassword());
         return myResponse;
     }
+
+    @RequestMapping(value = "add", method = {RequestMethod.GET})
+    public String handleUserAdd()
+    {
+        // String salt = ("8d78869f470951332959580424d4bf4f");
+        // String passwd = ("123456");
+        // String ps = passwordService.encryptPassword(salt, passwd);
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUid(3);
+        userInfo.setName("solo");
+        userInfo.setPassword("123456");
+        userInfo.setUserName("solo");
+        userInfo.setState(1);
+        userInfoService.insertUser(userInfo);
+        return userInfo.getPassword();
+    }
+
+    @RequestMapping(value = "mapperadd", method = {RequestMethod.GET})
+    public String handleUserMapperAdd()
+    {
+        // String salt = ("8d78869f470951332959580424d4bf4f");
+        // String passwd = ("123456");
+        // String ps = passwordService.encryptPassword(salt, passwd);
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUid(4);
+        userInfo.setName("tom");
+        userInfo.setPassword("123456");
+        userInfo.setUserName("tom");
+        userInfo.setState(1);
+        userInfoMapper.insertUser(userInfo);
+        return userInfo.getPassword();
+    }
+
+    @RequestMapping(value = "mapperupdate", method = {RequestMethod.GET})
+    public String handleUserMapperUpdate()
+    {
+        // String salt = ("8d78869f470951332959580424d4bf4f");
+        // String passwd = ("123456");
+        // String ps = passwordService.encryptPassword(salt, passwd);
+        UserInfo userInfo = userInfoMapper.getUserInfoByUid(4);
+        userInfo.setName("Tommy");
+        userInfoMapper.updateUser(userInfo);
+        return userInfo.getPassword();
+    }
+
+    @RequestMapping(value = "get")
+    public UserInfo handleGetUserInfo(Integer uid)
+    {
+        UserInfo userInfo = userInfoService.getUserInfoByUid(uid);
+        return userInfo;
+    }
+
+    @RequestMapping(value="userlist", method=RequestMethod.GET)
+    @LogAnnotation(content = "用户查询", type = "query")
+    public List<UserInfo> requestMethodName() {
+        List<UserInfo> userInfo = userInfoMapper.getAll();
+        return userInfo;
+    }
+    
 }

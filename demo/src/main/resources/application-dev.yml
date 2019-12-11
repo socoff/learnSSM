@@ -11,6 +11,8 @@ spring:
   thymeleaf:
     cache: false
     mode: HTML
+  aop: 
+    auto: true 
 
   # resources:
   #   static-locations: classpath:/META-INF/resources/,classpath:/META-INF/resources/webjars/,classpath:/static/swagger/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${web.upload-path}
@@ -43,4 +45,16 @@ spring:
 mybatis:
   # type-aliases-package: com.example.demo.bean
   mapper-locations: classpath:mapper/*.xml #mapper XML文件的位置
+  # configuration:
+  #   log-impl: LOG4J
+
+shiro:
+  credentials:
+    hashAlgorithmName: md5
+    hashIterations: 2
+    
+logging:
+  level:
+    com.example.demo: debug
+
 

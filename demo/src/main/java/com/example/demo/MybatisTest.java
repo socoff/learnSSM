@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import com.example.demo.bean.User;
+import com.example.demo.bean.UserInfo;
+import com.example.demo.service.UserInfoService;
 import com.example.demo.service.UserService;
 
 import org.apache.ibatis.io.Resources;
@@ -19,9 +21,21 @@ public class MybatisTest {
     @Autowired
     UserService userService;
 
+    @Autowired
+    static UserInfoService userInfoService;
+
     public static void main(String[] args) throws IOException {
         System.out.println("main func");
         
+        UserInfo userInfo = new UserInfo();
+        userInfo.setName("solo");
+        userInfo.setSalt("solo");
+        userInfo.setUserName("solo");
+        userInfo.setPassword("solo");
+        userInfo.setState(1);
+        userInfo.setUid(100);
+        
+        //userInfoService.getUserInfoByUserName("admin");
  
 
         // String resource = "mybatis-config.xml";

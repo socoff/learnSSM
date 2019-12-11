@@ -18,7 +18,7 @@ public class UserInfo {
                "\nuserName: " + userName;
     }
 
-    public String getCredentialsSalt()
+    public String credentialsSalt()
     {
         return this.userName + this.salt;
     }

@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Properties;
 
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
@@ -22,9 +23,15 @@ import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 @Configuration
 public class ShiroConfig {
 
+	@Value(value = "${shiro.credentials.hashAlgorithmName}")
+	private String algorithmName = "md5";
+	@Value(value = "${shiro.credentials.hashIterations}")
+	private int hashIterations = 2;
+
 	@Bean
 	public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
-		System.out.println("ShiroConfiguration.shirFilter()...");
+		System.out.println("ShiroConfiguration.shiroFilter()...");
+		// logger.error("Log4j2: ShiroConfiguration.shiroFilter()...");
 		ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
 		shiroFilterFactoryBean.setSecurityManager(securityManager);
 
@@ -61,8 +68,12 @@ public class ShiroConfig {
 	@Bean
 	public HashedCredentialsMatcher hashedCredentialsMatcher() {
 		HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
-		hashedCredentialsMatcher.setHashAlgorithmName("md5");// 散列算法:这里使用MD5算法;
-		hashedCredentialsMatcher.setHashIterations(2);// 散列的次数，比如散列两次，相当于 md5(md5(""));
+
+		System.out.println("=== algorithmName is: " + algorithmName);
+        System.out.println("=== hashIterations is: " + hashIterations);
+
+		hashedCredentialsMatcher.setHashAlgorithmName(algorithmName);// 散列算法:这里使用MD5算法;
+		hashedCredentialsMatcher.setHashIterations(hashIterations);// 散列的次数，比如散列两次，相当于 md5(md5(""));
 		return hashedCredentialsMatcher;
 	}
 
@@ -85,11 +96,11 @@ public class ShiroConfig {
 	@Bean
     public DefaultWebSessionManager defaultWebSessionManager() {
 		DefaultWebSessionManager defaultWebSessionManager = new DefaultWebSessionManager();
-		System.out.println("GlobalSessionTimeout: " + defaultWebSessionManager.getGlobalSessionTimeout());
-		defaultWebSessionManager.setSessionValidationInterval(1000);
-		// 此处设置session超时无效，原因未知
-		defaultWebSessionManager.setGlobalSessionTimeout(1000 * 10);// 会话过期时间，单位：毫秒(在无操作时开始计时)
-		System.out.println("GlobalSessionTimeout: " + defaultWebSessionManager.getGlobalSessionTimeout());
+		// System.out.println("GlobalSessionTimeout: " + defaultWebSessionManager.getGlobalSessionTimeout());
+		// defaultWebSessionManager.setSessionValidationInterval(1000);
+		// // 此处设置session超时无效，原因未知
+		// defaultWebSessionManager.setGlobalSessionTimeout(1000 * 10);// 会话过期时间，单位：毫秒(在无操作时开始计时)
+		// System.out.println("GlobalSessionTimeout: " + defaultWebSessionManager.getGlobalSessionTimeout());
 		defaultWebSessionManager.setSessionValidationSchedulerEnabled(true);
 		defaultWebSessionManager.setSessionIdCookieEnabled(true);
 		return defaultWebSessionManager;

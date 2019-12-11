@@ -44,8 +44,6 @@ public class MyShiroRealm extends AuthorizingRealm{
         String username = (String)token.getPrincipal();
         System.out.println("username is " + username);
         //System.out.println("username is " + username + ", password is " + (String)token.getCredentials());
-        //通过username从数据库中查找 User对象，如果找到，没找到.
-        //实际项目中，这里可以根据实际情况做缓存，如果不做，Shiro自己也是有时间间隔机制，2分钟内不会重复执行该方法
         UserInfo userInfo = userInfoService.getUserInfoByUserName(username);
         // UserInfo userInfo = userInfoService.getUserInfoByUid(1);
         if(userInfo == null){
@@ -53,16 +51,16 @@ public class MyShiroRealm extends AuthorizingRealm{
             return null;
         }
 
-        Subject subject = SecurityUtils.getSubject();
-        System.out.println("subject.getSession().getTimeout() is " + subject.getSession().getTimeout());
-        subject.getSession().setTimeout(10000); // 10秒，测试用，session超时此处设置才有效
-        System.out.println("subject.getSession().getTimeout() is " + subject.getSession().getTimeout());
+        // Subject subject = SecurityUtils.getSubject();
+        // System.out.println("subject.getSession().getTimeout() is " + subject.getSession().getTimeout());
+        // subject.getSession().setTimeout(600 * 1000); // 10分钟，测试用，session超时此处设置才有效
+        // System.out.println("subject.getSession().getTimeout() is " + subject.getSession().getTimeout());
         
         System.out.println("----->>userInfo:\n" + userInfo);
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
-                userInfo, //用户名
+                userInfo, //用户
                 userInfo.getPassword(), //密码
-                ByteSource.Util.bytes(userInfo.getCredentialsSalt()),//salt=username+salt
+                ByteSource.Util.bytes(userInfo.credentialsSalt()),//salt=username+salt
                 getName()  //realm name
         );
         return authenticationInfo;

@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import com.alibaba.fastjson.JSONObject;
+import com.example.demo.annotation.LogAnnotation;
 import com.example.demo.bean.User;
 import com.example.demo.service.UserInfoService;
 import com.example.demo.service.UserService;
@@ -39,6 +40,7 @@ public class HomeController extends BaseController {
     }
 
     @RequestMapping(value = "/login", method = { RequestMethod.POST, RequestMethod.GET })
+    @LogAnnotation(content = "用户登录", type = "login")
     public String login(HttpServletRequest request, Map<String, Object> map) throws Exception{
         System.out.println("HomeController.login()");
          // 登录失败从request中获取shiro处理的异常信息。
@@ -70,7 +72,7 @@ public class HomeController extends BaseController {
     @RequestMapping("/403")
     public String handle403()
     {
-        return "403";
+        return "/error403";
     }
     
     @RequestMapping("404")
