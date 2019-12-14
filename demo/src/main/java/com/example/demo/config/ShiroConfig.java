@@ -41,7 +41,10 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/static/**", "anon");
 		// 配置退出 过滤器,其中的具体的退出代码Shiro已经替我们实现了
 		filterChainDefinitionMap.put("/logout", "logout");
-		// /filterChainDefinitionMap.put("/swagger-ui.html", "anon");
+		filterChainDefinitionMap.put("/swagger-ui.html", "anon");
+		// 很多浏览器会首先请求网站图标favicon.ico，需要将这个文件设置为匿名访问，否则shiro拦截的是该图标请求
+		// shiro登录成功后会跳转到先前的URL请求，所以会直接显示或下载该图标，而不是我们想要的URL
+		filterChainDefinitionMap.put("/favicon.ico", "anon");
 		// filterChainDefinitionMap.put("/login", "anon");
 
 		// <!-- 过滤链定义，从上向下顺序执行，一般将/**放在最为下边 -->:这是一个坑呢，一不小心代码就不好使了;
@@ -51,7 +54,7 @@ public class ShiroConfig {
 		// 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
 		shiroFilterFactoryBean.setLoginUrl("/login");
 		// 登录成功后要跳转的链接
-		shiroFilterFactoryBean.setSuccessUrl("/hi");
+		shiroFilterFactoryBean.setSuccessUrl("/index.do");
 
 		// 未授权界面;
 		shiroFilterFactoryBean.setUnauthorizedUrl("/403");

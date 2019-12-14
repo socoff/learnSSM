@@ -13,6 +13,9 @@ spring:
     mode: HTML
   aop: 
     auto: true 
+  mvc:
+    favicon:
+      enabled: false
 
   # resources:
   #   static-locations: classpath:/META-INF/resources/,classpath:/META-INF/resources/webjars/,classpath:/static/swagger/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${web.upload-path}
