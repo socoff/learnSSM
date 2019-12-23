@@ -4,8 +4,16 @@ server:
   # servlet:
   #   session:
   #     timeout: 10s # 单位：秒
+# eureka:
+#   client:
+#     register-with-eureka: true
+#     fetch-registry: true
+#     service-url:
+#       defaultZone: http://localhost:8001/eureka/
 
 spring:
+  application:
+      name: learnSSM
   # mvc:
   #   static-path-pattern: /**
   thymeleaf:
